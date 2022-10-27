@@ -1,4 +1,3 @@
-Readme
 ## Para rodar o projeto:
 
 Olá. Para este projeto utilizei o EntityFramework junto com o SQLite e swagger para auxiliar na chamada dos endpoints. Para rodar o projeto basta executar os comandos:
