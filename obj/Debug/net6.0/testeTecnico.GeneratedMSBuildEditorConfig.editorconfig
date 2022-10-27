@@ -1,0 +1,20 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = testeTecnico
+build_property.RootNamespace = testeTecnico
+build_property.ProjectDir = /home/fabiana/acc.csharp/DesafioTecnicoCRM/testeTecnico/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/fabiana/acc.csharp/DesafioTecnicoCRM/testeTecnico
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/fabiana/acc.csharp/DesafioTecnicoCRM/testeTecnico/Views/Shared/projectView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL3Byb2plY3RWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
