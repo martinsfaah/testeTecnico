@@ -1,12 +1,12 @@
 namespace project.Models
 {
-  using System.ComponentModel.DataAnnotations;
   public class Inscricao
   {
-    [Key]
+
     public int CandidatoId { get; set; }
-    [Key]
+    public Candidato Candidato { get; set; }
     public int CursoId { get; set; }
+    public Curso Curso { get; set; }
 
   }
 }

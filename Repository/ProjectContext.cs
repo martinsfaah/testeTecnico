@@ -11,12 +11,7 @@ public class ProjectContext : DbContext, IProjectContext
   public DbSet<Curso>? Curso { get; set; }
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    if(!optionsBuilder.IsConfigured)
-    {
-      string connectionString = "Server=127.0.0.1;Database=project;User Id=sa;Password=Project27out;";
-      optionsBuilder.UseSqlServer(connectionString);
-    }
-
+    optionsBuilder.UseSqlite("Data Source=Project.db");
   }
   protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,13 +21,17 @@ public class ProjectContext : DbContext, IProjectContext
       modelBuilder.Entity<Curso>()
           .HasKey(c => c.CursoId);
 
-      modelBuilder.Entity<Inscricao>();
-      //     .HasKey(i => i.CandidatoId, i.CursoId)
-      //     .HasForeignKey(i => i.candidatoId, i.cursoId);
       
-      // modelBuilder.Entity<Inscricao>()
-      //     .HasKey(i => i.CursoId)
-      //     .HasForeignKey(i => i.candidatoId, i.cursoId);
+      modelBuilder.Entity<Inscricao>()
+        .HasKey(bc => new { bc.CandidatoId, bc.CursoId });  
+      modelBuilder.Entity<Inscricao>()
+        .HasOne(bc => bc.Candidato)
+        .WithMany(b => b.Inscricoes)
+        .HasForeignKey(bc => bc.CandidatoId);  
+      modelBuilder.Entity<Inscricao>()
+        .HasOne(bc => bc.Curso)
+        .WithMany(c => c.Inscricoes)
+        .HasForeignKey(bc => bc.CursoId);
 
 
     }

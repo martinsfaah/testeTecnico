@@ -16,39 +16,62 @@ namespace project.Controllers
     }
 
     [HttpGet]
-    public IActionResult GetInscricao()
+    public IActionResult GetAllInscricao()
     {
-      return Ok(_repository.GetInscricao());
+      var response = _repository.GetAllInscricao().Select(o => new InscricaoResponse(){
+        NomeCandidato = o.Candidato.Nome,
+        CpfCandidato = o.Candidato.Cpf,
+        NomeCurso = o.Curso.Nome
+      });
+      return Ok(response);
     }
 
-    [HttpPost]
-    public IActionResult AddCandidato([FromBody]Candidato candidato)
+    [HttpGet("view")]
+    public IActionResult ProjectView()
     {
-        if (candidato.Cpf.Length != 11 || candidato == null) {
+      var response = _repository.GetAllInscricao().Select(o => new InscricaoResponse(){
+        NomeCandidato = o.Candidato.Nome,
+        CpfCandidato = o.Candidato.Cpf,
+        NomeCurso = o.Curso.Nome
+      });
+      ViewBag.Inscricao = response;
+      return View();
+    }
+
+    [HttpPost("/candidato")]
+    public IActionResult AddCandidato([FromBody] AddCandidatoRequest addCandidatoRequest)
+    {
+        if (addCandidatoRequest.Cpf.Length != 11 || addCandidatoRequest == null) {
           return BadRequest();
         }
+
+        Candidato candidato = new() { Cpf = addCandidatoRequest.Cpf, Nome = addCandidatoRequest.Nome };
         _repository.AddCandidato(candidato);
 
-        return CreatedAtRoute(candidato.Nome, candidato);
+        return Ok();
     }
 
-    [HttpPost]
-    public IActionResult AddCurso([FromBody]Curso curso)
+    [HttpPost("/curso")]
+    public IActionResult AddCurso([FromBody]AddCursoRequest addCursoRequest)
     {
-        if (curso == null) {
+        if (addCursoRequest == null) {
             return BadRequest();
         }
+
+        Curso curso = new() { Nome = addCursoRequest.Nome };
         _repository.AddCurso(curso);
 
-        return CreatedAtRoute(curso.Nome, curso);
+        return Ok();
     }
 
-    [HttpPost]
-    public IActionResult AddInscricao([FromBody]Inscricao inscricao)
+    [HttpPost("/inscricao")]
+    public IActionResult AddInscricao([FromBody]AddInscricaoRequest addInscricaoRequest)
     {
-        if (inscricao == null) {
+        if (addInscricaoRequest == null) {
             return BadRequest();
         }
+
+        Inscricao inscricao = new() { CandidatoId = addInscricaoRequest.CandidatoId, CursoId = addInscricaoRequest.CursoId };
         _repository.AddInscricao(inscricao);
 
         return Ok();      
