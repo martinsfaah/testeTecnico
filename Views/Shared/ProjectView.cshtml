@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Candidato</th>
+    <th>Curso</th>
+  </tr>
+
+    @foreach (var item in ViewBag.Inscricao)
+    {
+        <tr>
+            <td>
+                @item.NomeCandidato;
+            </td>
+            <td>
+                @item.NomeCurso;
+            </td>
+        </tr>
+    }
+
+</table>
